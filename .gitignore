@@ -26,3 +26,12 @@
 *.exe
 *.out
 *.app
+
+# Vim
+*.un
+*.swp
+*~
+
+# Build stuff
+build/
+bin/
