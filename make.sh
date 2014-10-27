@@ -3,7 +3,6 @@
 if [ ! -d ./build/ ]; then
   mkdir ./build
 fi;
-
 cd build
 
 if [ "$1"="debug" ]; then
@@ -13,5 +12,4 @@ else
 fi;
 
 make
-
 cd ..

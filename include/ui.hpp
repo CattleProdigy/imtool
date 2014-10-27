@@ -3,6 +3,9 @@
 
 #include <QMainWindow> 
 #include <QLabel>
+#include <QSpinBox>
+#include <QTabWidget>
+#include <QTabWidget>
 
 #include "drop_area.hpp"
 
@@ -24,8 +27,12 @@ class UI : public QMainWindow {
     void create_menus();   
 
   private:
-    QWidget  *central_widget;
-    DropArea *drop_area;
+    QWidget     *central_widget;
+    QTabWidget  *tab_widget;
+    QLabel      *image_preview;
+    QSpinBox    *preview_selector;
+    DropArea    *drop_area;
+    
     
 }; 
 

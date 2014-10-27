@@ -33,7 +33,6 @@ imtool::DropArea::dragEnterEvent(QDragEnterEvent *event) {
   setBackgroundRole(QPalette::Highlight);
   
   event->acceptProposedAction();
-  emit changed(event->mimeData());
 }
 
 void 
@@ -55,25 +54,29 @@ imtool::DropArea::dropEvent(QDropEvent *event) {
   const QMimeData *mime_data = event->mimeData();
 
   if (mime_data->hasImage()) {
-      setPixmap(qvariant_cast<QPixmap>(mime_data->imageData()));
+    setPixmap(qvariant_cast<QPixmap>(mime_data->imageData()));
   } else if (mime_data->hasHtml()) {
-      setText(mime_data->html());
-      setTextFormat(Qt::RichText);
+    std::cout << "html" << std::endl;
+    setText(mime_data->html());
+    setTextFormat(Qt::RichText);
   } else if (mime_data->hasText()) {
-      setText(mime_data->text());
-      setTextFormat(Qt::PlainText);
+    std::cout << "text" << std::endl;
+    setText(mime_data->text());
+    setTextFormat(Qt::PlainText);
   } else if (mime_data->hasUrls()) {
-      QList<QUrl> urlList = mime_data->urls();
-      QString text;
-      for (int i = 0; i < urlList.size() && i < 32; ++i) {
-          QString url = urlList.at(i).path();
-          text += url + QString("\n");
-      }
-      setText(text);
+    std::cout << "url" << std::endl;
+    QList<QUrl> urlList = mime_data->urls();
+    QString text;
+    for (int i = 0; i < urlList.size() && i < 32; ++i) {
+      QString url = urlList.at(i).path();
+      text += url + QString("\n");
+    }
+    setText(text);
   } else {
-      setText(tr("Cannot display data"));
+    setText(tr("Cannot display data"));
   }
 
   setBackgroundRole(QPalette::Dark);
   event->acceptProposedAction();
+  emit changed(event->mimeData());
 }
